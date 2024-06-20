@@ -1,17 +1,13 @@
 <?php
 
+use App\Http\Controllers\TeacherController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
+Route::resource('teacher', TeacherController::class);
 
-Route::get('/create', function () {
-    return view('teacher.create');
-});
-Route::get('/index', function () {
-    return view('teacher.index');
-});
 Auth::routes();
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
