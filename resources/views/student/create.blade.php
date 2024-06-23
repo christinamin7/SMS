@@ -5,8 +5,8 @@
         <div class="col-md-6">
             <div class="card mt-3">
                <div class="card-body">
-                <h5>Teacher Form</h5>
-                <form action="{{ route('teacher.store') }}" method="POST" enctype="multipart/form-data">
+                <h5>Student Form</h5>
+                <form action="{{ route('student.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Name</label>

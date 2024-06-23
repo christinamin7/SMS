@@ -5,6 +5,7 @@
         <div class="col-md-12">
             <div class="card mt-3">
                <div class="card-body">
+                <h5>Student List</h5>
                 <table class="table">
                     <thead>
                       <tr>
@@ -21,23 +22,23 @@
                       </tr>
                     </thead>
                     <tbody>
-                      @foreach ($teachers as $teacher )
+                      @foreach ($students as $student )
                       <tr>
                         <th scope="row">{{ $loop->iteration }}</th>
-                        <td>{{ $teacher->name; }}</td>
-                        <td>{{ $teacher->email; }}</td>
-                        <td>{{ $teacher->phone; }}</td>
-                        <td>{{ $teacher->date_of_birth; }}</td>
-                        <td>{{$teacher->gender=='1'?'Male':'Female'}}</td>
-                        <td>{{ $teacher->address; }}</td>
-                        <td><img src="{{ asset('storage/teacher/'.$teacher->profile )}}" width="50px" height="50px"></td>                       
+                        <td>{{ $student->name; }}</td>
+                        <td>{{ $student->email; }}</td>
+                        <td>{{ $student->phone; }}</td>
+                        <td>{{ $student->date_of_birth; }}</td>
+                        <td>{{$student->gender=='1'?'Male':'Female'}}</td>
+                        <td>{{ $student->address; }}</td>
+                        <td><img src="{{ asset('storage/student/'.$student->profile )}}" width="50px" height="50px"></td>                       
                         <td> 
                             @csrf
                             @method('put')
-                            <a href="{{ route('teacher.edit',$teacher->id) }}"  class="btn btn-warning">E</a>
+                            <a href="{{ route('student.edit',$student->id) }}"  class="btn btn-warning">E</a>
                         </td>
                         <td>
-                            <form action="{{ route('teacher.destroy',$teacher->id)}}" method="POST" class="d-inline-block">
+                            <form action="{{ route('student.destroy',$student->id)}}" method="POST" class="d-inline-block">
                                 @csrf
                                 @method('delete')
                                 <button  class="btn btn-danger">D</button>
@@ -47,7 +48,7 @@
                       @endforeach                   
                     </tbody>
                   </table>
-                  <a href="{{ route('teacher.create') }}" class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Add Teacher</a> 
+                  <a href="{{ route('student.create') }}" class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Add student</a> 
             </div>
         </div>
     </div>
