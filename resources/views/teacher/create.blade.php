@@ -50,7 +50,7 @@
                              female
                             </label>
                           </div>
-                    </div>
+                    </div>                   
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label  @error('address') is-invalid @enderror" >Address</label>
                         <input type="text" class="form-control" name="address" id="address" placeholder="Address" value="{{ old('address') }}">

@@ -5,6 +5,7 @@
         <div class="col-md-12">
             <div class="card mt-3">
                <div class="card-body">
+                <h5>Teacher List</h5>
                 <table class="table">
                     <thead>
                       <tr>
@@ -31,23 +32,45 @@
                         <td>{{$teacher->gender=='1'?'Male':'Female'}}</td>
                         <td>{{ $teacher->address; }}</td>
                         <td><img src="{{ asset('storage/teacher/'.$teacher->profile )}}" width="50px" height="50px"></td>                       
-                        <td> 
+                       @if (Auth::user()->role==2)
+                       <td class="d-none"> 
+                        @csrf
+                        @method('put')
+                        <a href="{{ route('teacher.edit',$teacher->id) }}"  class="btn btn-warning">E</a>
+                      </td>
+                      <td class="d-none"> 
+                        <form action="{{ route('teacher.destroy',$teacher->id)}}" method="POST" class="d-inline-block">
                             @csrf
-                            @method('put')
-                            <a href="{{ route('teacher.edit',$teacher->id) }}"  class="btn btn-warning">E</a>
-                        </td>
-                        <td>
-                            <form action="{{ route('teacher.destroy',$teacher->id)}}" method="POST" class="d-inline-block">
-                                @csrf
-                                @method('delete')
-                                <button  class="btn btn-danger">D</button>
-                            </form>
-                        </td>
+                            @method('delete')
+                            <button  class="btn btn-danger">D</button>
+                        </form>
+                       </td>
+                       @else
+                       <td> 
+                        @csrf
+                        @method('put')
+                        <a href="{{ route('teacher.edit',$teacher->id) }}"  class="btn btn-warning">E</a>
+                      </td>
+                      <td> 
+                        <form action="{{ route('teacher.destroy',$teacher->id)}}" method="POST" class="d-inline-block">
+                            @csrf
+                            @method('delete')
+                            <button  class="btn btn-danger">D</button>
+                        </form>
+                       </td>
+                         
+                       @endif
+
                         </tr>
                       @endforeach                   
                     </tbody>
                   </table>
+                  @if (Auth::user()->role==2)                
+                  <a href="{{ route('teacher.create') }}" class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover d-none">Add Teacher</a> 
+                  @else
                   <a href="{{ route('teacher.create') }}" class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Add Teacher</a> 
+                  @endif
+                 
             </div>
         </div>
     </div>

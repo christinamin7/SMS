@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Teacher;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreTeacherRequest;
 use App\Http\Requests\UpdateTeacherRequest;
 use App\Models\User;
@@ -14,8 +15,9 @@ class TeacherController extends Controller
      * Display a listing of the resource.
      */
     
-    public function index()
+    public function index()    
     {
+          
         $teachers=User::where('role','1')->latest()->paginate(10);     
        return view('teacher.index',compact('teachers'));
     }
@@ -25,6 +27,9 @@ class TeacherController extends Controller
      */
     public function create()
     {
+        if(Auth::user()->role==2){
+            return back();
+        }     
         return view('teacher.create');
     }
 
@@ -84,18 +89,8 @@ class TeacherController extends Controller
      * Update the specified resource in storage.
      */
     public function update(UpdateTeacherRequest $request,$id)
-    {             
-        // $request->validate([   
-        //     'name'=>'required',
-        //    // 'email'=>'required |unique:users,email',
-        //     'email'=>'required',
-        //     'phone'=>'required',
-        //     'date_of_birth'=>'required | after:1943-12-31 | before:2004-01-01',
-        //     'gender'=>'required',
-        //     'address'=>'required',
-        //     'profile'=>'required'
-
-        // ]);     
+    {          
+   
         $teacher=User::FindOrFail($id);     
         if($request->profile){
             $file=$request->profile;

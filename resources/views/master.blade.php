@@ -186,9 +186,10 @@
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
           <img src="{{asset('dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
+         
         </div>
         <div class="info">
-          <a href="#" class="d-block">Chris</a>
+          <a href="#" class="d-block text-uppercase">{{ Auth::user()->name }}</a>
         </div>
       </div>
 
@@ -238,15 +239,116 @@
               </li>
             </ul>
           </li> --}}
-          <li class="nav-item">
+          {{-- <li class="nav-item">
             <a href="pages/widgets.html" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Widgets
-                <span class="right badge badge-danger">New</span>
+              
               </p>
             </a>
-          </li>
+          </li> --}}
+      @if(Auth::user()->role==0)
+      <li class="nav-item" >
+        <a href="{{ route('student.create') }}" class="nav-link">
+          <i class="nav-icon fas fa-th"></i>
+          <p>
+          Student Create              
+          </p>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="{{ route('student.index') }}" class="nav-link">
+          <i class="nav-icon fas fa-th"></i>
+          <p>
+           Student list              
+          </p>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="{{ route('teacher.create') }}" class="nav-link">
+          <i class="nav-icon fas fa-th"></i>
+          <p>
+            Teacher Create              
+          </p>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="{{ route('teacher.index') }}" class="nav-link">
+          <i class="nav-icon fas fa-th"></i>
+          <p>
+            Teacher List              
+          </p>
+        </a>
+      </li> 
+      <li class="nav-item">
+        <a href="{{ route('admin.create') }}" class="nav-link">
+          <i class="nav-icon fas fa-th"></i>
+          <p>
+            Admin Create              
+          </p>
+        </a>
+      </li>        
+      <li class="nav-item">
+        <a href="{{ route('admin.index') }}" class="nav-link">
+          <i class="nav-icon fas fa-th"></i>
+          <p>
+            Admin List              
+          </p>
+        </a>
+      </li>
+      @elseif (Auth::user()->role==1)
+      <li class="nav-item">
+        <a href="{{ route('student.create') }}" class="nav-link">
+          <i class="nav-icon fas fa-th"></i>
+          <p>
+          Student Create              
+          </p>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="{{ route('student.index') }}" class="nav-link">
+          <i class="nav-icon fas fa-th"></i>
+          <p>
+           Student list              
+          </p>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="{{ route('teacher.create') }}" class="nav-link">
+          <i class="nav-icon fas fa-th"></i>
+          <p>
+            Teacher Create              
+          </p>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="{{ route('teacher.index') }}" class="nav-link">
+          <i class="nav-icon fas fa-th"></i>
+          <p>
+            Teacher List              
+          </p>
+        </a>
+      </li> 
+      @else
+      <li class="nav-item">
+        <a href="{{ route('student.index') }}" class="nav-link">
+          <i class="nav-icon fas fa-th"></i>
+          <p>
+           Student list              
+          </p>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="{{ route('teacher.index') }}" class="nav-link">
+          <i class="nav-icon fas fa-th"></i>
+          <p>
+            Teacher List              
+          </p>
+        </a>
+      </li> 
+      @endif
+          
           {{-- <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
@@ -1456,8 +1558,18 @@
   <footer class="main-footer">
     <strong>Copyright &copy; 2014-2024 <a href="https://adminlte.io">Admin dashboard</a>.</strong>
     All rights reserved.
-    <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 3.2.0
+    <div class="float-right d-none d-sm-inline-block pb-5">
+      
+        <a class="btn btn-dark" href="{{ route('logout') }}"
+           onclick="event.preventDefault();
+                         document.getElementById('logout-form').submit();">
+            {{ __('Logout') }}
+        </a>
+
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+            @csrf
+        </form>
+    </div>
     </div>
   </footer>
 

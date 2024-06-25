@@ -32,23 +32,48 @@
                         <td>{{$student->gender=='1'?'Male':'Female'}}</td>
                         <td>{{ $student->address; }}</td>
                         <td><img src="{{ asset('storage/student/'.$student->profile )}}" width="50px" height="50px"></td>                       
-                        <td> 
+                      @if (Auth::User()->role==2)
+                       <td class="d-none"> 
+                        @csrf
+                        @method('put')
+                        <a href="{{ route('student.edit',$student->id) }}"  class="btn btn-warning">E</a>
+                       </td>
+                       <td class="d-none">
+                        <form action="{{ route('student.destroy',$student->id)}}" method="POST" class="d-inline-block">
                             @csrf
-                            @method('put')
-                            <a href="{{ route('student.edit',$student->id) }}"  class="btn btn-warning">E</a>
-                        </td>
-                        <td>
-                            <form action="{{ route('student.destroy',$student->id)}}" method="POST" class="d-inline-block">
-                                @csrf
-                                @method('delete')
-                                <button  class="btn btn-danger">D</button>
-                            </form>
-                        </td>
+                            @method('delete')
+                            <button  class="btn btn-danger">D</button>
+                         </form>
+                         </td>               
+                          
+                      @else                         
+                      
+                      <td> 
+                        @csrf
+                        @method('put')
+                        <a href="{{ route('student.edit',$student->id) }}"  class="btn btn-warning">E</a>
+                    </td>
+                    <td>
+                        <form action="{{ route('student.destroy',$student->id)}}" method="POST" class="d-inline-block">
+                            @csrf
+                            @method('delete')
+                            <button  class="btn btn-danger">D</button>
+                        </form>
+                    </td>
+                        
+                      @endif
+
+                      
                         </tr>
                       @endforeach                   
                     </tbody>
                   </table>
-                  <a href="{{ route('student.create') }}" class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Add student</a> 
+                  @if (Auth::user()->role==2)                
+                  <a href="{{ route('student.create') }}" class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover d-none">Add student</a>                
+                  @else
+                  <a href="{{ route('student.create') }}" class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Add student</a>
+                  @endif
+                   
             </div>
         </div>
     </div>

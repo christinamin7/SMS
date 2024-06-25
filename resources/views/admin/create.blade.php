@@ -5,8 +5,8 @@
         <div class="col-md-6">
             <div class="card mt-3">
                <div class="card-body">
-                <h5>Student Form</h5>
-                <form action="{{ route('student.store') }}" method="POST" enctype="multipart/form-data">
+                <h5>Admin Form</h5>
+                <form action="{{ route('admin.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Name</label>
@@ -52,47 +52,6 @@
                           </div>
                     </div>
                     <div class="mb-3">
-                        <h6><b>Skills</b></h6>
-                        <div class="form-check">
-                            <input class="form-check-input" name="skills[]" type="checkbox" value="java" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault">
-                              Java
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input"  name="skills[]" type="checkbox" value="angular" id="flexCheckChecked1" >
-                            <label class="form-check-label" for="flexCheckChecked1">
-                             Angular
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input"  name="skills[]" type="checkbox" value="jquery" id="flexCheckChecked2" >
-                            <label class="form-check-label" for="flexCheckChecked2">
-                             J Query
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input"  name="skills[]" type="checkbox" value="aws" id="flexCheckChecked3" >
-                            <label class="form-check-label" for="flexCheckChecked3">
-                             Aws
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input"  name="skills[]" type="checkbox" value="html" id="flexCheckChecked4" >
-                            <label class="form-check-label" for="flexCheckChecked4">
-                             HTML
-                            </label>
-                        </div>
-                    </div>   
-                    <div class="mb-3">
-                          <div class="form-check">
-                            <input class="form-check-input"  name="" type="checkbox" value="html" id="is_fullstack" >
-                            <label class="form-check-label" for="is_fullstack">
-                             Fullstack
-                            </label>
-                          </div>
-                    </div>                    
-                    <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label  @error('address') is-invalid @enderror" >Address</label>
                         <input type="text" class="form-control" name="address" id="address" placeholder="Address" value="{{ old('address') }}">
                         @error('address')
@@ -106,12 +65,11 @@
                         <small class="text-danger">{{ $message }}</small>
                     @enderror
                     </div>
-               
                     <div class="mb-3">
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                 </form>
-            </div>
+               </div>
  
             </div>
         </div>

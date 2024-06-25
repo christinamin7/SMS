@@ -31,7 +31,7 @@ class StudentController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(StorestudentRequest $request)
-    {
+        {
         $student=new User();
         $request->validate([   
             'name'=>'required',
@@ -54,6 +54,8 @@ class StudentController extends Controller
         $student->date_of_birth=$request->date_of_birth;
         $student->gender=$request->gender;
         $student->address=$request->address;
+        // $student->skills=$request->skills;
+        // $student->is_fullstack=$request->is_fullstack;
         $student->profile=$newName;
         $student->role='2';
         $student->save();
