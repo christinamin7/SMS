@@ -1,19 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<style>
-    /* Custom CSS to center the row on the screen */
-    .center-screen {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh; /* Adjust height as needed */
-    }
-  </style>
-  <div class="container-fluid center-screen">
-    <div class="row justify-content-center">
-        
-        <div class="col-md-12">
+  <div class="container-fluid ">
+    <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">        
+        <div class="col-md-6">
             <div class="card">
                 <div class="card-header">{{ __('Login') }}</div>
 
