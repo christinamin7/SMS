@@ -6,6 +6,7 @@ use App\Models\student;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StorestudentRequest;
 use App\Http\Requests\UpdatestudentRequest;
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
 class StudentController extends Controller
@@ -36,6 +37,7 @@ class StudentController extends Controller
         $request->validate([   
             'name'=>'required',
             'email'=>'required |unique:users,email',
+            'phone'=>'password',
             'phone'=>'required',
             'date_of_birth'=>'required',
             'gender'=>'required',
@@ -50,6 +52,7 @@ class StudentController extends Controller
         }      
         $student->name=$request->name;
         $student->email=$request->email;
+        $student->password=Hash::make($request->password);
         $student->phone=$request->phone;
         $student->date_of_birth=$request->date_of_birth;
         $student->gender=$request->gender;

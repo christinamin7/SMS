@@ -23,12 +23,20 @@
                         @enderror
                     </div>
                     <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Password</label>
+                        <input type="text" class="form-control @error('password') is-invalid @enderror" name="password" id="password" placeholder="Password">
+                        @error('password')
+                        <small class="text-danger">{{ $message }}</small>                            
+                    @enderror
+                    </div>
+                    <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label  @error('phone') is-invalid @enderror">Phone</label>
                         <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone" value="{{ old('phone') }}">
                         @error('phone')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
+                  
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label  @error('date_of_birth') is-invalid @enderror">Date of Birth</label>
                         <input type="date" class="form-control" id="date_of_birth" name="date_of_birth" placeholder="Date of Birth" value="{{ old('date_of_birth') }}">

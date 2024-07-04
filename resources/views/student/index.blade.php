@@ -48,16 +48,24 @@
                           
                       @else                         
                       
-                      <td> 
-                        @csrf
-                        @method('put')
-                        <a href="{{ route('student.edit',$student->id) }}"  class="btn btn-warning">E</a>
+                      <td>                   
+                       
+                        <form action="{{ route('student.edit',$student->id)}}" class="d-inline-block">  
+                          @csrf
+                          @method('put')                      
+                          <button class="btn btn-warning">
+                            <i class="fas fa-pen"></i>
+                        </button>
+                      </form>
                     </td>
                     <td>
-                        <form action="{{ route('student.destroy',$student->id)}}" method="POST" class="d-inline-block">
-                            @csrf
-                            @method('delete')
-                            <button  class="btn btn-danger">D</button>
+                     
+                        <form action="{{ route('student.destroy',$student->id)}}" method="POST" class="d-inline-block"> 
+                          @csrf
+                          @method('delete')                           
+                            <button class="btn btn-danger">
+                              <i class="fas fa-trash"></i>
+                          </button>
                         </form>
                     </td>
                         

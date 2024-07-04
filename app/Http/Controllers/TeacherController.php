@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Teacher;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\StoreTeacherRequest;
 use App\Http\Requests\UpdateTeacherRequest;
 use App\Models\User;
@@ -17,8 +18,8 @@ class TeacherController extends Controller
     
     public function index()    
     {
-          
-        $teachers=User::where('role','1')->latest()->paginate(10);     
+    
+        $teachers=User::where('role','1')->latest()->paginate(10);                     
        return view('teacher.index',compact('teachers'));
     }
 
@@ -42,6 +43,7 @@ class TeacherController extends Controller
         $request->validate([   
             'name'=>'required',
             'email'=>'required |unique:users,email',
+            'password'=>'required',
             'phone'=>'required',
             'date_of_birth'=>'required | after:1943-12-31 | before:2004-01-01',
             'gender'=>'required',
@@ -56,6 +58,7 @@ class TeacherController extends Controller
         }      
         $teacher->name=$request->name;
         $teacher->email=$request->email;
+        $teacher->password=Hash::make($request->password);
         $teacher->phone=$request->phone;
         $teacher->date_of_birth=$request->date_of_birth;
         $teacher->gender=$request->gender;
@@ -105,7 +108,7 @@ class TeacherController extends Controller
         $teacher->gender=$request->gender;
         $teacher->address=$request->address;       
         $teacher->update();       
-        return redirect()->route('teacher.index');
+        return redirect()->route('teacher.index')->with('success', 'Profile updated successfully.');;
     }
 
     /**

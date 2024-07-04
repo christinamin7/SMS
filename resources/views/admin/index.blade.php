@@ -31,19 +31,27 @@
                         <td>{{ $admin->date_of_birth; }}</td>
                         <td>{{$admin->gender=='1'?'Male':'Female'}}</td>
                         <td>{{ $admin->address; }}</td>
-                        <td ><img src="{{ asset('storage/admin/'.$admin->profile )}}" width="50px" height="50px"></td>                       
+                        <td ><img src="{{ asset('storage/admin/'.$admin->profile )}}" width="50px" height="50px"></td>    
+                                                                
                         <td> 
+                          <form action="{{ route('admin.edit',$admin->id)}}" class="d-inline-block">
                             @csrf
                             @method('put')
-                            <a href="{{ route('admin.edit',$admin->id) }}"  class="btn btn-warning">E</a>
-                        </td>
+                            <button class="btn btn-warning">
+                              <i class="fas fa-pen"></i>
+                          </button>
+                        </form>                           
+                        </td>                        
                         <td>
                             <form action="{{ route('admin.destroy',$admin->id)}}" method="POST" class="d-inline-block">
                                 @csrf
                                 @method('delete')
-                                <button  class="btn btn-danger">D</button>
+                                <button class="btn btn-danger"  {{Auth::id()==$admin->id ? 'disabled' : '' }}>
+                                  <i class="fas fa-trash"></i>
+                              </button>
                             </form>
                         </td>
+                   
                         </tr>
                       @endforeach                   
                     </tbody>

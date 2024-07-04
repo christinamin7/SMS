@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\StoreadminRequest;
 use App\Http\Requests\UpdateadminRequest;
 use App\Models\User;
@@ -20,7 +21,7 @@ class AdminController extends Controller
         if(Auth::user()->role>0){
             return back();
         }        
-        $admins=User::where('role','0')->latest()->paginate(10);     
+        $admins=User::where('role','0')->latest()->paginate(10);                   
         return view('admin.index',compact('admins'));
     }
 
@@ -40,10 +41,12 @@ class AdminController extends Controller
      */
     public function store(StoreadminRequest $request)
     {
+       
         $admin=new User();
         $request->validate([   
             'name'=>'required',
             'email'=>'required |unique:users,email',
+            'password'=>'required',
             'phone'=>'required',
             'date_of_birth'=>'required',
             'gender'=>'required',
@@ -58,6 +61,7 @@ class AdminController extends Controller
         }      
         $admin->name=$request->name;
         $admin->email=$request->email;
+        $admin->password= Hash::make($request->password);
         $admin->phone=$request->phone;
         $admin->date_of_birth=$request->date_of_birth;
         $admin->gender=$request->gender;

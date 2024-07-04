@@ -46,16 +46,23 @@
                         </form>
                        </td>
                        @else
-                       <td> 
-                        @csrf
-                        @method('put')
-                        <a href="{{ route('teacher.edit',$teacher->id) }}"  class="btn btn-warning">E</a>
+                       <td>                         
+                        <form action="{{ route('teacher.edit',$teacher->id)}}" class="d-inline-block">
+                          @csrf
+                          @method('put')                         
+                          <button  class="btn btn-warning">
+                            <i class="fas fa-pen"></i>
+                          </button>
+                      </form>
                       </td>
+                      
                       <td> 
                         <form action="{{ route('teacher.destroy',$teacher->id)}}" method="POST" class="d-inline-block">
                             @csrf
                             @method('delete')
-                            <button  class="btn btn-danger">D</button>
+                            <button  class="btn btn-danger"  {{Auth::id()==$teacher->id ? 'disabled' : '' }}>
+                              <i class="fas fa-trash"></i>
+                            </button>
                         </form>
                        </td>
                          
@@ -70,9 +77,11 @@
                   @else
                   <a href="{{ route('teacher.create') }}" class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Add Teacher</a> 
                   @endif
+                  
                  
             </div>
         </div>
     </div>
 </div>
+
 @endsection
